@@ -1,0 +1,23 @@
+-- Đặt tên Database theo định dạng PhamQuangHien_25DH110063.
+CREATE DATABASE Warehouse_MSSV;
+GO
+USE Warehouse_MSSV;
+GO
+
+CREATE TABLE Products (
+    ProductID INT IDENTITY(1,1) PRIMARY KEY,
+    ProductName NVARCHAR(100) NOT NULL,
+    Category NVARCHAR(100) NOT NULL,
+    Price DECIMAL(18,2) NOT NULL,
+    Quantity INT NOT NULL
+);
+GO
+
+-- Ít nhất 5 sản phẩm, 2 danh mục, tên gắn với sinh viên.
+INSERT INTO Products (ProductName, Category, Price, Quantity) VALUES
+(N'Bàn phím cơ Hien', N'Phụ kiện Hien', 500000, 0),
+(N'Chuột không dây Hien', N'Phụ kiện Hien', 250000, 3),
+(N'Màn hình Dell Hien', N'Thiết bị hiển thị Hien', 3500000, 5),
+(N'Tai nghe Hien', N'Thiết bị âm thanh Hien', 600000, 10),
+(N'Ghế xoay Hien', N'Nội thất Hien', 1200000, 2);
+GO
