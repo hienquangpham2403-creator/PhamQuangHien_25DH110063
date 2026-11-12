@@ -1,0 +1,17 @@
+﻿@{
+    ViewBag.Title = "Thống kê kết quả kiểm kê";
+}
+
+<h2>Thống kê kết quả kiểm kê kho hàng</h2>
+
+<div class="panel panel-info" style="padding: 20px; border: 1px solid #bce8f1; max-width: 600px; margin-top: 20px;">
+    <h3>Kết quả thống kê</h3>
+    <hr />
+    <p style="font-size: 16px;"><strong>Tổng số lượng sản phẩm:</strong> <span class="text-primary">@ViewBag.TotalProducts</span></p>
+    <p style="font-size: 16px;"><strong>Số sản phẩm hết hàng (Quantity = 0):</strong> <span class="text-danger">@ViewBag.OutOfStock</span></p>
+    <p style="font-size: 16px;"><strong>Tổng giá trị hàng tồn kho (SUM Price * Quantity):</strong> <span class="text-success">@string.Format("{0:N0}", ViewBag.TotalInventoryValue) VNĐ</span></p>
+</div>
+
+<p style="margin-top: 20px;">
+    @Html.ActionLink("Quay lại danh sách", "Index", null, new { @class = "btn btn-default" })
+</p>

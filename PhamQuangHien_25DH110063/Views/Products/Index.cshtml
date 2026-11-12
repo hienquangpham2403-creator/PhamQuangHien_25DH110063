@@ -1,0 +1,88 @@
+﻿@model IEnumerable<PhamQuangHien_25DH110063.Models.Products>
+
+@{
+    ViewBag.Title = "Danh sách sản phẩm";
+}
+
+<h2>Danh sách sản phẩm</h2>
+
+<!-- THÊM HIỂN THỊ THÔNG BÁO KIỂM KÊ -->
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-success" style="font-weight:bold; color:green; border: 1px solid green; padding: 10px; margin-bottom:10px;">
+        @TempData["Message"]
+    </div>
+}
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Category)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Quantity)
+        </th>
+        <!-- 1. THÊM TIÊU ĐỀ CỘT TÌNH TRẠNG -->
+        <th>
+            Tình trạng
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Category)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Quantity)
+            </td>
+
+            <!-- 2. THÊM LOGIC HIỂN THỊ TÌNH TRẠNG -->
+            <td>
+                @if (item.Quantity == 0)
+                {
+                    <span style="color: red; font-weight: bold;">Hết hàng</span>
+                }
+                else if (item.Quantity >= 1 && item.Quantity <= 4)
+                {
+                    <span style="color: orange; font-weight: bold;">Sắp hết</span>
+                }
+                else
+                {
+                    <span style="color: green; font-weight: bold;">Đủ hàng</span>
+                }
+            </td>
+
+            <td>
+                <!-- 3. SỬA LẠI ID ĐỂ CÁC NÚT HOẠT ĐỘNG ĐƯỢC VÀ THÊM NÚT "KIỂM KÊ" -->
+                @Html.ActionLink("Edit", "Edit", new { id = item.ProductID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.ProductID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ProductID }) |
+                <strong style="color:blue;">@Html.ActionLink("Kiểm kê", "InventoryUpdate", new { id = item.ProductID })</strong>
+            </td>
+        </tr>
+    }
+</table>

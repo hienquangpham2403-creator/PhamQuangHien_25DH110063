@@ -1,0 +1,44 @@
+﻿@{
+    ViewBag.Title = "Kiểm kê đồng thời hai sản phẩm";
+}
+
+<h2>Kiểm kê đồng thời hai sản phẩm</h2>
+
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger" style="color:red; font-weight:bold; border:1px solid red; padding:10px; margin-bottom:15px;">
+        @TempData["Error"]
+    </div>
+}
+
+<form action="/Products/BatchInventoryUpdate" method="post" style="max-width: 600px;">
+
+    <!-- Sản phẩm thứ nhất -->
+    <div class="panel panel-default" style="padding: 15px; border: 1px solid #ddd; margin-bottom: 15px;">
+        <h4>Sản phẩm 1</h4>
+        <div class="form-group" style="margin-bottom:10px;">
+            <label>Chọn sản phẩm:</label>
+            @Html.DropDownList("id1", (SelectList)ViewBag.ProductList, "-- Chọn sản phẩm 1 --", new { @class = "form-control", @required = "required" })
+        </div>
+        <div class="form-group">
+            <label>Số lượng thực tế mới:</label>
+            <input type="number" name="qty1" class="form-control" min="0" required />
+        </div>
+    </div>
+
+    <!-- Sản phẩm thứ hai -->
+    <div class="panel panel-default" style="padding: 15px; border: 1px solid #ddd; margin-bottom: 15px;">
+        <h4>Sản phẩm 2</h4>
+        <div class="form-group" style="margin-bottom:10px;">
+            <label>Chọn sản phẩm:</label>
+            @Html.DropDownList("id2", (SelectList)ViewBag.ProductList, "-- Chọn sản phẩm 2 --", new { @class = "form-control", @required = "required" })
+        </div>
+        <div class="form-group">
+            <label>Số lượng thực tế mới:</label>
+            <input type="number" name="qty2" class="form-control" min="0" required />
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Thực hiện kiểm kê đồng thời</button>
+    @Html.ActionLink("Quay lại danh sách", "Index", null, new { @class = "btn btn-default", @style = "margin-left: 10px;" })
+</form>
